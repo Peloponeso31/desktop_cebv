@@ -180,17 +180,26 @@
         <Image x:Name="pictureBox4" Margin="927,35,0,0" Source="/media/images/senas/Minus loadIcon.png" MouseLeftButtonDown="image_userSelect" Height="245" VerticalAlignment="Top" HorizontalAlignment="Left" Width="288"/>
         <Button Style="{DynamicResource RoundedButtonStyle}" Content="Guardar" HorizontalAlignment="Left" Margin="934,294,0,0" VerticalAlignment="Top" Width="125" Height="34" RenderTransformOrigin="0,0.5" Background="{StaticResource CustomColorg}" Click="Button_Click"/>
         <Button Style="{DynamicResource ButtonStyle1}" Content="Borrar" HorizontalAlignment="Left" Margin="1081,294,0,0" VerticalAlignment="Top" Width="125" Height="34" Background="{StaticResource CustomColorr}"/>
-        <DataGrid x:Name="dataGridView1" d:ItemsSource="{d:SampleData ItemCount=1}" Margin="623,341,31,36" AutoGenerateColumns="False" Width="592">
+        <DataGrid x:Name="dataGridView1" Margin="623,341,31,36" AutoGenerateColumns="False" Width="592">
             <DataGrid.Columns>
-                <DataGridTextColumn Header="No."/>
-                <DataGridTextColumn Header="Region del cuerpo"/>
-                <DataGridTextColumn Header="Tipo"/>
-                <DataGridTextColumn Header="Lado"/>
-                <DataGridTextColumn Header="Vista"/>
-                <DataGridTextColumn Header="Cantidad"/>
-                <DataGridTextColumn Header="Descripcion"/>
-                <DataGridTemplateColumn Header="Imagen"/>
-                <DataGridTextColumn Header="Coordenadas"/>
+                <DataGridTextColumn Header="No." Binding="{Binding No}"/>
+                <DataGridTextColumn Header="Region del cuerpo" Binding="{Binding Region}"/>
+                <DataGridTextColumn Header="Tipo" Binding="{Binding Tipo}"/>
+                <DataGridTextColumn Header="Lado" Binding="{Binding Lado}"/>
+                <DataGridTextColumn Header="Vista" Binding="{Binding Vista}"/>
+                <DataGridTextColumn Header="Cantidad" Binding="{Binding Cantidad}"/>
+                <DataGridTextColumn Header="Descripcion" Binding="{Binding Descripcion}"/>
+                <DataGridTemplateColumn Header="Imagen">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <Image Source="{Binding RutaImagen}" 
+                                   Stretch="Uniform"
+                                   HorizontalAlignment="Center"
+                                   VerticalAlignment="Center"/>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+                <DataGridTextColumn Header="Coordenadas" Binding="{Binding Coordenadas}"/>
             </DataGrid.Columns>
         </DataGrid>
     </Grid>

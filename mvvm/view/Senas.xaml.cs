@@ -1,6 +1,7 @@
 ﻿using Microsoft.Win32;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -21,7 +22,9 @@ namespace Comisión_Estatal_de_Búsqueda_del_Estado_de_Veracruz.mvvm.view
 {
     public partial class Senas : UserControl
     {
+        private ObservableCollection<caracDato> dataRegis = new ObservableCollection<caracDato>();
         String globarCoordenadas, globalRGB, globalSideRGB;
+        int dataTableCounter = 0, imageTest = 0;
         public Senas()
         {
             InitializeComponent();
@@ -29,8 +32,36 @@ namespace Comisión_Estatal_de_Búsqueda_del_Estado_de_Veracruz.mvvm.view
             comboBox2.Text = "Lado";
             comboBox3.Text = "Vista";
             comboBox4.Text = "Cantidad";
-        }
 
+            dataGridView1.ItemsSource = dataRegis;
+        }
+        public class caracDato
+        {
+            public int No { get; set; }
+            public string Region { get; set; }
+            public string Tipo { get; set; }
+            public string Lado { get; set; }
+            public string Vista { get; set; }
+            public string Cantidad { get; set; }
+            public string Descripcion { get; set; }
+            public string RutaImagen { get; set; }
+            public string Coordenadas { get; set; }
+        }
+        private void addBodyData() //Obtener y añadir los datos a la tabla
+        {
+            int no = dataTableCounter;
+            string region = textBox1.Text;
+            string tipo = comboBox1.Text;
+            string lado = comboBox2.Text;
+            string vista = comboBox3.Text;
+            string cantidad = comboBox4.Text;
+            string descripcion = DescriptionBox.Text;
+            string rutaImagen = pictureBox4.Tag as string;
+            string coordenadas = globalRGB;
+
+            // Crear un nuevo objeto caracDato y agregarlo a la colección
+            dataRegis.Add(new caracDato { No = no, Region = region, Tipo = tipo, Lado = lado, Vista = vista, Cantidad = cantidad, Descripcion = descripcion, RutaImagen = rutaImagen, Coordenadas = coordenadas});
+        }
         private void image_userIn(object sender, MouseButtonEventArgs e)
         {
             //Obtener las coordenadas del clic
@@ -59,7 +90,6 @@ namespace Comisión_Estatal_de_Búsqueda_del_Estado_de_Veracruz.mvvm.view
             BuscarParte(globalRGB);
             BuscarLado(globalSideRGB);
         }
-
         private void BuscarLado(String RGBside)
         {
             switch (RGBside)
@@ -75,7 +105,6 @@ namespace Comisión_Estatal_de_Búsqueda_del_Estado_de_Veracruz.mvvm.view
                     break;
             }
         }
-
         private void BuscarParte(String RGB)
         {
             switch (RGB) {
@@ -321,7 +350,6 @@ namespace Comisión_Estatal_de_Búsqueda_del_Estado_de_Veracruz.mvvm.view
                     break;
             }
         }
-
         private Color ObtenerColorPixel(int x, int y, int state)
         {
             BitmapSource imagen;
@@ -344,7 +372,6 @@ namespace Comisión_Estatal_de_Búsqueda_del_Estado_de_Veracruz.mvvm.view
             //Crear y devolver el color del píxel en formato RGB
             return Color.FromRgb(datos[2], datos[1], datos[0]);
         }
-
         private void image_userSelect(object sender, MouseButtonEventArgs e)
         {
             //Crear un cuadro de diálogo para seleccionar un archivo
@@ -364,10 +391,12 @@ namespace Comisión_Estatal_de_Búsqueda_del_Estado_de_Veracruz.mvvm.view
 
                     //Mostrar la imagen en el elemento Image
                     ((Image)sender).Source = bitmapImage;
+
+                    imageTest = 1;
                 }
                 catch (Exception ex)
                 {
-                    MessageBox.Show("Error al cargar el archivo seleccionado: " + ex.Message);
+                    MessageBox.Show("Error al cargar el archivo seleccionado:" + ex.Message, "Error", MessageBoxButton.OK, MessageBoxImage.Error);
                 }
             }
         }
@@ -379,34 +408,30 @@ namespace Comisión_Estatal_de_Búsqueda_del_Estado_de_Veracruz.mvvm.view
                 DescriptionBox.Foreground = Brushes.Black;
             }
         }
-
-        private void Button_Click(object sender, RoutedEventArgs e)
-        {
-            if (textBox1.Text != "" && comboBox1.Text != "" && comboBox2.Text != "" && comboBox4.Text != "" && comboBox3.Text != "" && DescriptionBox.Text != "" && globalRGB != "")
-            {
-                int contadorFilas = 0;
-
-                // Incrementa el contador de filas
-                contadorFilas += 1;
-
-                // Obtener imagen
-                ImageSource imagenSource = pictureBox4.Source;
-
-                // Crea un array para representar los datos de una fila
-                object[] nuevaFila = { contadorFilas, textBox1.Text, comboBox1.Text, comboBox2.Text, comboBox4.Text, comboBox3.Text, DescriptionBox.Text, globalRGB };
-
-                // Agrega la nueva fila al DataGridView
-                dataGridView1.Items.Add(nuevaFila);
-            }
-            
-        }
-
         private void ReplaceBlankDescripcion(object sender, RoutedEventArgs e)
         {
             if (DescriptionBox.Text == "")
             {
                 DescriptionBox.Foreground = Brushes.DarkGray;
                 DescriptionBox.Text = "Descripción";
+            }
+        }
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            if (textBox1.Text != "Region del cuerpo" && 
+                comboBox1.Text != "Tipo" && 
+                comboBox2.Text != "Lado" && 
+                comboBox4.Text != "Vista" && 
+                comboBox3.Text != "Cantidad" && 
+                DescriptionBox.Text != "Descripción" &&
+                imageTest == 1)
+            {
+                dataTableCounter += 1; // Incrementa el contador de filas
+                addBodyData(); // Añade los datos
+            }
+            else
+            {
+                MessageBox.Show("Llena los campos requeridos", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
             }
         }
     }
