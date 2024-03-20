@@ -16,7 +16,7 @@ namespace Comisión_Estatal_de_Búsqueda_del_Estado_de_Veracruz.core
     {
         private static HttpClient sharedClient = new()
         {
-            BaseAddress = new Uri("http://187.188.213.206:18080/api/"),
+            BaseAddress = new Uri("http://187.251.212.146:18080/api/"),
         };
 
         public static async Task<Object> GetTokenRequest(string Usuario, string Password)
