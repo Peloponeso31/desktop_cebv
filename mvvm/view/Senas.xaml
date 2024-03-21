@@ -134,7 +134,7 @@
                 </TransformGroup>
             </TextBox.RenderTransform>
         </TextBox>
-        <ComboBox x:Name="comboBox1" Foreground="DarkGray" HorizontalAlignment="Left" Margin="623,71,0,0" VerticalAlignment="Top" Width="257">
+        <ComboBox x:Name="comboBox1" Foreground="DarkGray" HorizontalAlignment="Left" Margin="623,71,0,0" VerticalAlignment="Top" Width="257" LostFocus="changeBlankTipo">
             <ComboBoxItem Content="Tipo" IsEnabled="False" Foreground="DarkGray"/>
             <ComboBoxItem Content="ARETE/PERFORACIONES" Foreground="Black"/>
             <ComboBoxItem Content="CICATRIZ" Foreground="Black"/>
@@ -147,7 +147,7 @@
             <ComboBoxItem Content="TATUAJE" Foreground="Black"/>
             <ComboBoxItem Content="OTRO" Foreground="Black"/>
         </ComboBox>
-        <ComboBox x:Name="comboBox2" Foreground="DarkGray" HorizontalAlignment="Left" Margin="623,108,0,0" VerticalAlignment="Top" Width="257">
+        <ComboBox x:Name="comboBox2" Foreground="DarkGray" HorizontalAlignment="Left" Margin="623,108,0,0" VerticalAlignment="Top" Width="257" LostFocus="changeBlankLado">
             <ComboBoxItem Content="Lado" IsEnabled="False"/>
             <ComboBoxItem Content="DERECHO" Foreground="Black"/>
             <ComboBoxItem Content="IZQUIERDO" Foreground="Black"/>
@@ -156,7 +156,7 @@
             <ComboBoxItem Content="ANTERIOR" Foreground="Black"/>
             <ComboBoxItem Content="POSTERIOR" Foreground="Black"/>
         </ComboBox>
-        <ComboBox x:Name="comboBox3" Foreground="DarkGray" HorizontalAlignment="Left" Margin="623,146,0,0" VerticalAlignment="Top" Width="257">
+        <ComboBox x:Name="comboBox3" Foreground="DarkGray" HorizontalAlignment="Left" Margin="623,146,0,0" VerticalAlignment="Top" Width="257" LostFocus="changeBlankVista">
             <ComboBoxItem Content="Vista" IsEnabled="False"/>
             <ComboBoxItem Content="DORSAL" Foreground="Black"/>
             <ComboBoxItem Content="FRONTAL" Foreground="Black"/>
@@ -164,7 +164,7 @@
             <ComboBoxItem Content="EXTERNO" Foreground="Black"/>
             <ComboBoxItem Content="NO ESPECIFICA" Foreground="Black"/>
         </ComboBox>
-        <ComboBox x:Name="comboBox4" Foreground="DarkGray" HorizontalAlignment="Left" Margin="623,185,0,0" VerticalAlignment="Top" Width="257">
+        <ComboBox x:Name="comboBox4" Foreground="DarkGray" HorizontalAlignment="Left" Margin="623,185,0,0" VerticalAlignment="Top" Width="257" LostFocus="changeBlankCantidad">
             <ComboBoxItem Content="Cantidad" IsEnabled="False"/>
             <ComboBoxItem Content="1" Foreground="Black"/>
             <ComboBoxItem Content="2" Foreground="Black"/>

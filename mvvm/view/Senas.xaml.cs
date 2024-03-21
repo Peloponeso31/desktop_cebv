@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -89,6 +90,9 @@ namespace Comisión_Estatal_de_Búsqueda_del_Estado_de_Veracruz.mvvm.view
 
             BuscarParte(globalRGB);
             BuscarLado(globalSideRGB);
+
+            textBox1.Foreground = Brushes.Black;
+            comboBox3.Foreground = Brushes.Black;
         }
         private void BuscarLado(String RGBside)
         {
@@ -400,6 +404,50 @@ namespace Comisión_Estatal_de_Búsqueda_del_Estado_de_Veracruz.mvvm.view
                 }
             }
         }
+        private void changeBlankTipo(object sender, RoutedEventArgs e)
+        {
+            if (comboBox1.Text == "Tipo")
+            {
+                comboBox1.Foreground = Brushes.DarkGray;
+            }
+            else
+            {
+                comboBox1.Foreground = Brushes.Black;
+            }
+        }
+        private void changeBlankLado(object sender, RoutedEventArgs e)
+        {
+            if (comboBox2.Text == "Lado")
+            {
+                comboBox2.Foreground = Brushes.DarkGray;
+            }
+            else
+            {
+                comboBox2.Foreground = Brushes.Black;
+            }
+        }
+        private void changeBlankVista(object sender, RoutedEventArgs e)
+        {
+            if (comboBox3.Text == "Vista")
+            {
+                comboBox3.Foreground = Brushes.DarkGray;
+            }
+            else
+            {
+                comboBox3.Foreground = Brushes.Black;
+            }
+        }
+        private void changeBlankCantidad(object sender, RoutedEventArgs e)
+        {
+            if (comboBox4.Text == "Cantidad")
+            {
+                comboBox4.Foreground = Brushes.DarkGray;
+            }
+            else
+            {
+                comboBox4.Foreground = Brushes.Black;
+            }
+        }
         private void ReplaceDescripcion(object sender, RoutedEventArgs e)
         {
             if (DescriptionBox.Text == "Descripción")
@@ -418,7 +466,8 @@ namespace Comisión_Estatal_de_Búsqueda_del_Estado_de_Veracruz.mvvm.view
         }
         private void Button_Click(object sender, RoutedEventArgs e)
         {
-            if (textBox1.Text != "Region del cuerpo" && 
+            if (textBox1.Text != "Region del cuerpo" &&
+                textBox1.Text != "NINGUNA SELECCION" &&
                 comboBox1.Text != "Tipo" && 
                 comboBox2.Text != "Lado" && 
                 comboBox4.Text != "Vista" && 
@@ -426,8 +475,38 @@ namespace Comisión_Estatal_de_Búsqueda_del_Estado_de_Veracruz.mvvm.view
                 DescriptionBox.Text != "Descripción" &&
                 imageTest == 1)
             {
-                dataTableCounter += 1; // Incrementa el contador de filas
-                addBodyData(); // Añade los datos
+                //Todo lo que esta en comentario es para reemplazar la imagen subida por el usuario por la imagen por default
+                //string defaultImage = "C:/Users/davfa/source/repos/desktop_cebv/media/images/senas/Minus loadIcon.png";
+
+                //if (File.Exists(defaultImage))
+                //{
+                //BitmapImage bitmapImage = new BitmapImage(new Uri(defaultImage));
+                //pictureBox4.Source = new BitmapImage(new Uri(defaultImage, UriKind.Relative));
+
+                MessageBox.Show("Se guardó la información correctamente", "", MessageBoxButton.OK, MessageBoxImage.Information);
+
+                    dataTableCounter += 1; // Incrementa el contador de filas
+                    addBodyData(); // Añade los datos
+
+                    textBox1.Text = "Region del cuerpo";
+                    comboBox1.Text = "Tipo";
+                    comboBox2.Text = "Lado";
+                    comboBox4.Text = "Cantidad";
+                    comboBox3.Text = "Vista";
+                    DescriptionBox.Text = "Descripción";
+                    imageTest = 0;
+
+                    textBox1.Foreground = Brushes.DarkGray;
+                    comboBox1.Foreground = Brushes.DarkGray;
+                    comboBox2.Foreground = Brushes.DarkGray;
+                    comboBox3.Foreground = Brushes.DarkGray;
+                    comboBox4.Foreground = Brushes.DarkGray;
+                    DescriptionBox.Foreground = Brushes.DarkGray;
+                //}
+                //else
+                //{
+                //    MessageBox.Show("Error al cargar los recursos del proyecto. \nNo se encontró:\n" + defaultImage, "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                //}
             }
             else
             {
