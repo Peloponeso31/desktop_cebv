@@ -35,6 +35,7 @@ namespace Comisión_Estatal_de_Búsqueda_del_Estado_de_Veracruz.mvvm.view
             comboBox4.Text = "Cantidad";
 
             dataGridView1.ItemsSource = dataRegis;
+            scrollBarVertical.ValueChanged += ScrollBarVertical_ValueChanged;
         }
         public class caracDato //Caracteristicas de los datos para la tabla
         {
@@ -47,6 +48,10 @@ namespace Comisión_Estatal_de_Búsqueda_del_Estado_de_Veracruz.mvvm.view
             public string Descripcion { get; set; }
             public string RutaImagen { get; set; }
             public string Coordenadas { get; set; }
+        }
+        private void ScrollBarVertical_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
+        {
+            scrollViewer.ScrollToVerticalOffset(e.NewValue);
         }
         private void addBodyData() //Obtener y añadir los datos a la tabla
         {
