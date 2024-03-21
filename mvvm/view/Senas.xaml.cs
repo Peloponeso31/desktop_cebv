@@ -36,7 +36,7 @@ namespace Comisión_Estatal_de_Búsqueda_del_Estado_de_Veracruz.mvvm.view
 
             dataGridView1.ItemsSource = dataRegis;
         }
-        public class caracDato
+        public class caracDato //Caracteristicas de los datos para la tabla
         {
             public int No { get; set; }
             public string Region { get; set; }
@@ -63,7 +63,7 @@ namespace Comisión_Estatal_de_Búsqueda_del_Estado_de_Veracruz.mvvm.view
             // Crear un nuevo objeto caracDato y agregarlo a la colección
             dataRegis.Add(new caracDato { No = no, Region = region, Tipo = tipo, Lado = lado, Vista = vista, Cantidad = cantidad, Descripcion = descripcion, RutaImagen = rutaImagen, Coordenadas = coordenadas});
         }
-        private void image_userIn(object sender, MouseButtonEventArgs e)
+        private void image_userIn(object sender, MouseButtonEventArgs e) //Obtener colores y coordenadas
         {
             //Obtener las coordenadas del clic
             Point posicionClic = e.GetPosition(imageUnix);
@@ -94,7 +94,7 @@ namespace Comisión_Estatal_de_Búsqueda_del_Estado_de_Veracruz.mvvm.view
             textBox1.Foreground = Brushes.Black;
             comboBox3.Foreground = Brushes.Black;
         }
-        private void BuscarLado(String RGBside)
+        private void BuscarLado(String RGBside) //Identificar la vista dependiendo de la zona seleccionada por el usuario
         {
             switch (RGBside)
             {
@@ -109,7 +109,7 @@ namespace Comisión_Estatal_de_Búsqueda_del_Estado_de_Veracruz.mvvm.view
                     break;
             }
         }
-        private void BuscarParte(String RGB)
+        private void BuscarParte(String RGB) //Identificar la parte del cuerpo seleccionada
         {
             switch (RGB) {
                 case "255, 0, 0":
@@ -354,17 +354,17 @@ namespace Comisión_Estatal_de_Búsqueda_del_Estado_de_Veracruz.mvvm.view
                     break;
             }
         }
-        private Color ObtenerColorPixel(int x, int y, int state)
+        private Color ObtenerColorPixel(int x, int y, int state) //Obtener colores dependiendo de los parametros obtenidos
         {
             BitmapSource imagen;
 
             if (state == 0)
             {
-                imagen = (BitmapSource)imageColorMap.Source;
+                imagen = (BitmapSource)imageColorMap.Source; //Si es cero buscar los colores en el mapeo completo
             }
             else
             {
-                imagen = (BitmapSource)imageSide.Source;
+                imagen = (BitmapSource)imageSide.Source; //Si es diferente a cero buscar los colores en el mapeo de las vistas
             }
 
             //Crear un arreglo de bytes para almacenar los datos de los píxeles
@@ -376,7 +376,7 @@ namespace Comisión_Estatal_de_Búsqueda_del_Estado_de_Veracruz.mvvm.view
             //Crear y devolver el color del píxel en formato RGB
             return Color.FromRgb(datos[2], datos[1], datos[0]);
         }
-        private void image_userSelect(object sender, MouseButtonEventArgs e)
+        private void image_userSelect(object sender, MouseButtonEventArgs e) //Perimite al usuario seleccionar y mostrar una imagen
         {
             //Crear un cuadro de diálogo para seleccionar un archivo
             OpenFileDialog openFileDialog = new OpenFileDialog();
@@ -404,7 +404,7 @@ namespace Comisión_Estatal_de_Búsqueda_del_Estado_de_Veracruz.mvvm.view
                 }
             }
         }
-        private void changeBlankTipo(object sender, RoutedEventArgs e)
+        private void changeBlankTipo(object sender, RoutedEventArgs e) //Identificar si el usuario hizo un cambio en la casilla de Tipo y cambiar los colores
         {
             if (comboBox1.Text == "Tipo")
             {
@@ -415,7 +415,7 @@ namespace Comisión_Estatal_de_Búsqueda_del_Estado_de_Veracruz.mvvm.view
                 comboBox1.Foreground = Brushes.Black;
             }
         }
-        private void changeBlankLado(object sender, RoutedEventArgs e)
+        private void changeBlankLado(object sender, RoutedEventArgs e) //Identificar si el usuario hizo un cambio en la casilla de Lado y cambiar los colores
         {
             if (comboBox2.Text == "Lado")
             {
@@ -426,7 +426,7 @@ namespace Comisión_Estatal_de_Búsqueda_del_Estado_de_Veracruz.mvvm.view
                 comboBox2.Foreground = Brushes.Black;
             }
         }
-        private void changeBlankVista(object sender, RoutedEventArgs e)
+        private void changeBlankVista(object sender, RoutedEventArgs e) //Identificar si el usuario hizo un cambio en la casilla de Vista y cambiar los colores
         {
             if (comboBox3.Text == "Vista")
             {
@@ -437,7 +437,7 @@ namespace Comisión_Estatal_de_Búsqueda_del_Estado_de_Veracruz.mvvm.view
                 comboBox3.Foreground = Brushes.Black;
             }
         }
-        private void changeBlankCantidad(object sender, RoutedEventArgs e)
+        private void changeBlankCantidad(object sender, RoutedEventArgs e) //Identificar si el usuario hizo un cambio en la casilla de Cantidad y cambiar los colores
         {
             if (comboBox4.Text == "Cantidad")
             {
@@ -448,7 +448,7 @@ namespace Comisión_Estatal_de_Búsqueda_del_Estado_de_Veracruz.mvvm.view
                 comboBox4.Foreground = Brushes.Black;
             }
         }
-        private void ReplaceDescripcion(object sender, RoutedEventArgs e)
+        private void ReplaceDescripcion(object sender, RoutedEventArgs e) //Si es seleccionado la descripcion se le cambia el color de la fuente
         {
             if (DescriptionBox.Text == "Descripción")
             {
@@ -456,7 +456,7 @@ namespace Comisión_Estatal_de_Búsqueda_del_Estado_de_Veracruz.mvvm.view
                 DescriptionBox.Foreground = Brushes.Black;
             }
         }
-        private void ReplaceBlankDescripcion(object sender, RoutedEventArgs e)
+        private void ReplaceBlankDescripcion(object sender, RoutedEventArgs e) //Si la descripcion se deja en blanco se pone un texto por default
         {
             if (DescriptionBox.Text == "")
             {
@@ -464,7 +464,7 @@ namespace Comisión_Estatal_de_Búsqueda_del_Estado_de_Veracruz.mvvm.view
                 DescriptionBox.Text = "Descripción";
             }
         }
-        private void Button_Click(object sender, RoutedEventArgs e)
+        private void Button_Click(object sender, RoutedEventArgs e) //Accion para verificar si todos los datos fueron introduccidos, guardar y mostrar en una tabla
         {
             if (textBox1.Text != "Region del cuerpo" &&
                 textBox1.Text != "NINGUNA SELECCION" &&
